@@ -13,11 +13,11 @@ def main():
         # ignore header
         # 000001,2017-09-30 1.06
         for row in source_file:
-            v = d1[row[0]][row[1].split('-')[0]]
+            v = d1[row[0].zfill(6)][row[1].split('-')[0]]
             if not row[12]:
                 continue
             if (v and float(v) < float(row[12])) or not v:
-                d1[row[0]][row[1].split('-')[0]] = row[12]
+                d1[row[0].zfill(6)][row[1].split('-')[0]] = row[12]
 
     l2 = []
     with open('../FS_Comins2.csv', 'rb') as csvfile_dest:
@@ -26,7 +26,7 @@ def main():
         # ignore header
         for row in dest_file:
             # 600528 2003
-            l2.append((row[0], str(int(row[1]) - 1)))
+            l2.append((row[0].zfill(6), str(int(row[1]) - 1)))
 
     with open('../FS_Comins_result.csv', 'wb') as f:
         writer = csv.writer(f, delimiter=',')
