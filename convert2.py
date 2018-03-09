@@ -14,10 +14,10 @@ def main():
         # 000001,2017-09-30 1.06
         for row in source_file:
             v = d1[row[0].zfill(6)][row[1].split('-')[0]]
-            if not row[2]:
+            if not row[2] and not row[3]:
                 continue
-            if (v and float(v) < float(row[2])) or not v:
-                d1[row[0].zfill(6)][row[1].split('-')[0]] = row[2]
+            # if (v and float(v) < float(row[2])) or not v:
+            d1[row[0].zfill(6)][row[1].split('-')[0]] = (row[2], row[3])
 
     l2 = []
     with open('../dest.csv', 'rb') as csvfile_dest:
@@ -32,7 +32,7 @@ def main():
         writer = csv.writer(f, delimiter=',')
         for key, year in l2:
             v = d1[key][year]
-            writer.writerow([key, int(year) + 1, year, v])
+            writer.writerow([key, int(year) + 1, year, v[0], v[1]])
 
 
 if __name__ == '__main__':
