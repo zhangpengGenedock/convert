@@ -20,9 +20,9 @@ def main():
         next(dest_file, None)
         # ignore header
         for row in dest_file:
-            if row[0]:
+            if row and row[0]:
                 # 600528, 2001
-                l2.append((row[0], row[1]))
+                l2.append((row[0]))
 
     # d3 = collections.defaultdict(list)
     # for day, key in l2:
@@ -40,9 +40,10 @@ def main():
         writer = csv.writer(f, delimiter=',')
         for key in l2:
             try:
-                writer.writerow([key[0], key[1], d1[key[0]][key[1]]])
+                for v in d1[key]:
+                    writer.writerow([key, v, d1[key][v]])
             except:
-                writer.writerow([key[0], key[1], ''])
+                writer.writerow([key, '', ''])
 
 
 if __name__ == '__main__':
