@@ -40,7 +40,7 @@ def main():
         writer = csv.writer(f, delimiter=',')
         for key in l2:
             try:
-                for v in d1[key]:
+                for v in sorted(d1[key]):
                     writer.writerow([key, v, d1[key][v]])
             except:
                 writer.writerow([key, '', ''])
