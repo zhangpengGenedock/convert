@@ -22,7 +22,7 @@ def main():
         for row in dest_file:
             if row[0]:
                 # 600528, 2001
-                l2.append((row[0], row[1]))
+                l2.append((row[0].zfill(6), row[1].strip()))
 
     # d3 = collections.defaultdict(list)
     # for day, key in l2:
@@ -36,7 +36,7 @@ def main():
     #     for j in range(0 if i - 37 < 0 else i - 37, i):
     #         d3[(day, key)].append((d1[key][j][0], d1[key][j][1]))
 
-    with open('../data/result4.csv', 'wb') as f:
+    with open('../data/result.csv', 'wb') as f:
         writer = csv.writer(f, delimiter=',')
         for key in l2:
             try:
